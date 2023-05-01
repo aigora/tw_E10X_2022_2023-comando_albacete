@@ -1,11 +1,12 @@
-# [Título del trabajo]
+# [Electric File Manager]
 
-[Descripción breve del proyecto a realizar (2-3 frases).]
+[Creación de un programa que abra , analice y realize algunos cálculos estadísticos matemáticos sobre los datos del mismo.]
 
 ## Integrantes del equipo
 
-[Nombres, apellidos, y usuario GitHub de los integrantes del equipo.]
+[Álvaro Campos Coria, Nº55764, E-105.]
 
 ## Objetivos del trabajo
 
-[Lista de los objetivos que se persiguen con el trabajo propuesto.]
+[Creación de funciones tales como cambio de unidades, lectura de datos, ordenación de datos, 
+cálculo de parametros matemáticos, discriminación según tipos de datos.]
