@@ -28,7 +28,8 @@ int main()
       while (fgets(contenido, 6737, archivo))
         printf("%s", contenido);
     }
-    fclose(archivo);
+//    fclose(archivo);
 
    return 0;
 }
+
