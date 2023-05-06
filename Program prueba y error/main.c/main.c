@@ -1,73 +1,62 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<math.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <locale.h>
 
-typedef struct
-{
-    char nombre[50];
-    char mes[10];
-    float cantidad;
-}tecnologias;
-typedef struct
-{
-    char mes[10];
-    float cantidadtotal;
-}sumatorio;
+int main() {
 
-int main()
-{
-    FILE *archivo, *copiat;
-    tecnologias tecnologia[408];//Vector de estructuras con el tamaño justo, 17 tecnologias a 24 meses cada una
-    sumatorio totalmes[12]; //Vector estructuras que dará el total de cada mes
-    char contenido[2500];
-    int lectura=0, numerotecnologia=0;
+    FILE *archivo;
+    setlocale(LC_ALL, "spanish");
+    char linea[500];
+    char fechas[25][10];
+    char energia[30][20];
+    char *fecha;
+    int i, numfecha = 0;
+    char anio_str[5];
+    int anio_deseado = 0;
 
-    archivo = fopen("generacion_por_tecnologias_21_22.txt", "r");
-    //Abre en modo lectura, comprueba que se abre el archivo.
-    if(archivo == NULL)
+    while (anio_deseado != 2021 && anio_deseado != 2022)
     {
-        printf("Error al abrir el atchivo\n");
-        return 1;
-    }
-    //Si no abre, da mensaje de error y termina el programa.
-    else
-    {
-        printf("Fichero abierto correctamente \n");
-		fclose(archivo);
-    }
-
-    if(archivo !=NULL)
-    {
-        while (fgets(contenido, 2500, archivo))
+        printf("Ingrese el año deseado (2021 o 2022): ");
+        scanf("%s", anio_str);
+        anio_deseado = atoi(anio_str);
+        if (anio_deseado != 2021 && anio_deseado != 2022)
         {
-            printf("%s", contenido);
+            printf("Año inválido. Intente nuevamente.\n");
         }
     }
-    //Si el archivo existe, esta parte del código lee el contenido del mismo y lo
-    //imprime en pantalla
 
-
-    copiat = fopen("copia.txt", "w");
-    //Funcionalidad de copiar el archivo.
-    if(copiat == NULL)
-    {
-        printf("Error al abrir el atchivo\n");
-        return 1;
+    archivo = fopen("generacion.txt", "r");
+    if (archivo != NULL) {
+        for (i = 0; i < 5; i++)
+        { //Lee hasta la quinta linea;
+            fgets(linea, 500, archivo);
+        }
+        fecha = strtok(linea, ",");
+        while (fecha != NULL && numfecha < 25) // Validar que no se exceda el tamaño de fechas
+        {
+            // Extraer el año de la fecha
+            char* mes_str = strtok(fecha, "/");
+            char* anio_str = strtok(NULL, "/");
+            int anio = atoi(anio_str);
+            // Si el año coincide con el deseado, almacenar la fecha
+            if (anio == anio_deseado)
+            {
+                sprintf(fechas[numfecha], "%s/%s", mes_str, anio_str);
+                numfecha++;
+            }
+            fecha = strtok(NULL, ",");
+        }
+        for (i = 0; i < numfecha; i++) { // Imprimir todas las fechas almacenadas
+            printf("%s\n", fechas[i]);
+        }
+        fclose(archivo);
     }
-    while ((copiat = fgets(contenido, 2500,archivo)!= EOF))
+    else
     {
-        fputs(contenido[2500], copiat);
+        printf("No se pudo abrir el archivo.\n");
     }
-    fclose(copiat);
-    //reabro el archivo.
-    fopen(archivo);
-    //AUN NO SÉ COMO HACER LA LECTURA Y ALMACENAMIENTO ORDENADO DE DATOS.
-//    do
-//    {
-//        lectura = fscanf(archivo, ",")
-//
-//    }while (!feof(archivo));
-
 
     return 0;
 }
+
