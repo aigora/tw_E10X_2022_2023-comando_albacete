@@ -28,39 +28,51 @@ int main()
     printf("Tamaño del archivo = %ld\n", size);
     fclose(archivo);
     archivo = fopen("generacion.txt", "r");
-
-    printf("Linea, Total o Fechas?(L),(T) o (F)\n");
+    printf("Año 2021(1) o Año 2022(2) o Total(3):\n");
     scanf("%c", &opcion);
     switch(opcion)
     {
-    case 'T':
-    case 't':
-            if(archivo!=NULL)
+    case '1':
+        if (archivo != NULL)
+          {
+            for (i = 0; i < 5; i++)
+                { //Lee hasta la quinta linea;
+                fgets(linea, 500, archivo);
+                fecha = strtok(linea, ",");
+                }
+            while (fecha != NULL && numfecha < 25)
             {
-          while (fgets(contenido, 6737, archivo))
-            printf("%s", contenido);
+                strcpy(fechas[numfecha], fecha);
+                numfecha++;
+                fecha = strtok(NULL, ",");
             }
-            fclose(archivo);
-            break;
-    case'L':
-    case'l':
-        printf("Linea?");
-        scanf("%d", &numlin);
-        if(archivo!=NULL)
-        {
-        while (fgets(linea,500,archivo))
+            numfecha=13;
+            for (i = 0; i < numfecha; i++) // Imprimir todas las fechas almacenadas
+                printf("%s\n", fechas[i]);
+          }
+         break;
+    case'2':
+        if (archivo != NULL)
+          {
+            for (i = 0; i < 5; i++)
+                { //Lee hasta la quinta linea;
+                fgets(linea, 500, archivo);
+                fecha = strtok(linea, ",");
+                }
+            while (fecha != NULL && numfecha < 25)
             {
-            contadorlinea++;
-            if (contadorlinea == numlin)
-            printf("%s\n", linea);
+                strcpy(fechas[numfecha], fecha);
+                numfecha++;
+                fecha = strtok(NULL, ",");
             }
-        }
-        else if(numlin>=23)
-        printf("Límite de líneas alcanzado\n");
-        break;
-    case 'F':
-    case 'f':
-          if (archivo != NULL)
+            numfecha=25;
+            printf("Fecha\n");
+            for (i = 13; i < numfecha; i++) // Imprimir todas las fechas almacenadas
+                printf("%s\n", fechas[i]);
+          }
+         break;
+    case '3':
+        if (archivo != NULL)
           {
             for (i = 0; i < 5; i++)
                 { //Lee hasta la quinta linea;
@@ -78,9 +90,10 @@ int main()
          }
          break;
     default:
-        printf("Opción no valida");
+        printf("No seas pelotudo\n");
     }
     fclose(archivo);
-   return 0;
+    return 0;
 }
+
 
