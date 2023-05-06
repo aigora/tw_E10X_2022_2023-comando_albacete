@@ -3,23 +3,22 @@
 #include <string.h>
 #include <locale.h>
 
+#define BUFFER_SIZE 6737
+
 int main() {
 
     FILE *archivo;
     setlocale(LC_ALL, "spanish");
     char linea[500];
-    char fechas[25][10];
-    char energia[30][20];
+    char fechas[500][100];
     char *fecha;
     int i, numfecha = 0;
-    char anio_str[5];
     int anio_deseado = 0;
 
     while (anio_deseado != 2021 && anio_deseado != 2022)
     {
         printf("Ingrese el año deseado (2021 o 2022): ");
-        scanf("%s", anio_str);
-        anio_deseado = atoi(anio_str);
+        scanf("%d", &anio_deseado);
         if (anio_deseado != 2021 && anio_deseado != 2022)
         {
             printf("Año inválido. Intente nuevamente.\n");
@@ -59,4 +58,5 @@ int main() {
 
     return 0;
 }
+
 
