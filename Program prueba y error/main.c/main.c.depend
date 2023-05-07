@@ -1,7 +1,0 @@
-# depslib dependency file v1.0
-1683387060 source:c:\users\34679\documents\github\tw_e10x_2022_2023-comando_albacete\program prueba y error\main.c\main.c
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	<locale.h>
-
