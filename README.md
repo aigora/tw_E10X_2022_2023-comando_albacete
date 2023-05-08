@@ -4,7 +4,8 @@
 
 ## Integrantes del equipo
 
-[Álvaro Campos Coria, Nº55764, E-105.]
+[Álvaro Campos Coria, Nº55764, E-105.
+Iker Sádaba Ochoa, ikeerrs.]
 
 ## Objetivos del trabajo
 
