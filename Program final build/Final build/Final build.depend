@@ -1,15 +1,21 @@
 # depslib dependency file v1.0
 1683391556 source:c:\users\34679\documents\github\tw_e10x_2022_2023-comando_albacete\program final build\final build\main.c
 
-1683505034 source:c:\users\34679\documents\github\tw_e10x_2022_2023-comando_albacete\program final build\final build\prueba.c
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	<locale.h>
+1683542451 source:c:\users\34679\documents\github\tw_e10x_2022_2023-comando_albacete\program final build\final build\prueba.c
 
-1683504473 source:c:\users\34679\documents\github\tw_e10x_2022_2023-comando_albacete\program final build\final build\bacano.c
+1683537771 source:c:\users\34679\documents\github\tw_e10x_2022_2023-comando_albacete\program final build\final build\bacano.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<math.h>
+
+1683543398 c:\users\34679\documents\github\tw_e10x_2022_2023-comando_albacete\program final build\final build\bacano.h
+
+1683544219 source:c:\users\34679\documents\github\tw_e10x_2022_2023-comando_albacete\program final build\final build\pfunciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<locale.h>
+	"bacano.h"
+	<ctype.h>
 

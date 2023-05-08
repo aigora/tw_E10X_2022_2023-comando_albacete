@@ -3,7 +3,7 @@
 #include<string.h>
 #include<math.h>
 
-void leer_fechas(FILE *archivo, char fechas[][20], int *numfecha)
+void leer_fechas(FILE *archivo, char fechas[25][20], int *numfecha)
 {
     char linea[500], *token;
     int i;
