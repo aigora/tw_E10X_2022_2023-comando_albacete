@@ -22,6 +22,10 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="alejandria.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="alejandria.h" />
 		<Unit filename="alvaritomain.c">
 			<Option compilerVar="CC" />
 		</Unit>
