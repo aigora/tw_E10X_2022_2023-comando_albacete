@@ -285,67 +285,68 @@
 //
 //
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
-#include"alejandria.h"
-
-int main() {
-    int num_lines;
-    Energias* data = leer_archivo("generacion.txt", &num_lines);
-    if (data == NULL) {
-        return 1;
-    }
-    Energias* leer_archivo(char* filename, int* num_lines);
-
-
-
-    char input_name[100];
-    printf("Ingrese el nombre de la energía que desea buscar: ");
-    fgets(input_name, 100, stdin);
-    // Elimina el salto de línea final de la entrada
-    input_name[strcspn(input_name, "\n")] = '\0';
-
-    // Limpiar y normalizar la cadena de entrada
-    char input_name_clean[100];
-    strcpy(input_name_clean, input_name);
-    convertir_caracteres_especiales(input_name_clean);
-    for (int i = 0; i < strlen(input_name_clean); i++) {
-        input_name_clean[i] = tolower(input_name_clean[i]);
-    }
-
-    // Busca la coincidencia y muestra los valores correspondientes
-    int found = 0;
-    for (int i = 0; i < num_lines; i++) {
-        // Limpiar y normalizar el nombre almacenado en la estructura
-        char name_clean[20];
-        strcpy(name_clean, data[i].name);
-        convertir_caracteres_especiales(name_clean);
-        for (int j = 0; j < strlen(name_clean); j++) {
-            name_clean[j] = tolower(name_clean[j]);
-        }
-
-        // Comparar las cadenas normalizadas
-        if (strcmp(name_clean, input_name_clean) == 0) {
-            found = 1;
-            printf("%s: ", data[i].name);
-            for (int j = 0; j < data[i].num_values; j++) {
-                printf("%f ", data[i].values[j]);
-            }
-            printf("\n");
-            break;
-        }
-    }
-
-    if (!found) {
-        printf("No se encontró la energía ingresada\n");
-    }
-
-    return 0;
-}
-
-
-
-
-
+//#include <stdio.h>
+//#include <stdlib.h>
+//#include <string.h>
+//#include <ctype.h>
+//#include"alejandria.h"
+//
+//int main() {
+//    int num_lines;
+//    Energias* data = leer_archivo("generacion.txt", &num_lines);
+//    if (data == NULL) {
+//        return 1;
+//    }
+//
+//
+//    Energias* leer_archivo(char* filename, int* num_lines);
+//    fecha* leer_fechas(char* filename, int* num_lines);
+//
+//    char input_name[100];
+//    printf("Ingrese el nombre de la energía que desea buscar: ");
+//    fgets(input_name, 100, stdin);
+//    // Elimina el salto de línea final de la entrada
+//    input_name[strcspn(input_name, "\n")] = '\0';
+//
+//    // Limpiar y normalizar la cadena de entrada
+//    char input_name_clean[100];
+//    strcpy(input_name_clean, input_name);
+//    convertir_caracteres_especiales(input_name_clean);
+//    for (int i = 0; i < strlen(input_name_clean); i++) {
+//        input_name_clean[i] = tolower(input_name_clean[i]);
+//    }
+//
+//    // Busca la coincidencia y muestra los valores correspondientes
+//    int found = 0;
+//    for (int i = 0; i < num_lines; i++) {
+//        // Limpiar y normalizar el nombre almacenado en la estructura
+//        char name_clean[20];
+//        strcpy(name_clean, data[i].name);
+//        convertir_caracteres_especiales(name_clean);
+//        for (int j = 0; j < strlen(name_clean); j++) {
+//            name_clean[j] = tolower(name_clean[j]);
+//        }
+//
+//        // Comparar las cadenas normalizadas
+//        if (strcmp(name_clean, input_name_clean) == 0) {
+//            found = 1;
+//            printf("%s: ", data[i].name);
+//            for (int j = 0; j < data[i].num_values; j++) {
+//                printf("%f ", data[i].values[j]);
+//            }
+//            printf("\n");
+//            break;
+//        }
+//    }
+//
+//    if (!found) {
+//        printf("No se encontró la energía ingresada\n");
+//    }
+//
+//    return 0;
+//}
+//
+//
+//
+//
+//
