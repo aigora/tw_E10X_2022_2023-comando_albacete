@@ -90,5 +90,26 @@ void convertir_caracteres_especiales(char *cadena) {
     }
 }
 
+void print_energy_type(Datos informacion[], int num_anios) {
+    int seleccionenergia;
+    printf("Enter the energy type index (0-18): ");
+    scanf("%d", &seleccionenergia);
+    getchar(); // Consume the newline character
+
+    // Check if the energy type index is within the valid range
+    if (seleccionenergia >= 0 && seleccionenergia < 19) {
+        printf("%s:\n", informacion[0].datos[seleccionenergia].energia);
+        for (int j = 0; j < num_anios; j++) {
+            for (int i = 0; i < 12; i++) {
+                if (informacion[j].fecha[i].mes != 0) {
+                    printf("%d/%d: %.15f\n", informacion[j].fecha[i].mes, informacion[j].fecha[i].anio, informacion[j].datos[seleccionenergia].cantidad[i]);
+                }
+            }
+        }
+    } else {
+        printf("Invalid energy type index.\n");
+    }
+}
+
 
 

@@ -82,7 +82,7 @@ int main(){
     }
 
     //Imprimir tabla:
-
+//    print_energy_type(valor_energia, num_anio);
 
 
     for ( k = 0; k < 18; k++){
