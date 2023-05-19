@@ -8,6 +8,8 @@ Creación de un programa que abra , analice y realize algunos cálculos matemát
 
 #Iker Sádaba Ochoa, ikeerrs.
 
+#Daniel Cerviño Soto, Nº57023, E-105. daniel.cervino@alumnos.upm.es
+
 ## Objetivos del trabajo
 
 1-Lectura del archivo.
