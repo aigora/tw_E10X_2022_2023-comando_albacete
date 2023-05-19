@@ -23,51 +23,60 @@ typedef struct
 }Datos;
 
 
+void compilar_fechas(char fila[], Datos informacion[]){
+    int i = 0, j = 0, k = 0, mes = 0, anio = 0;
+    char titulo[50], separador[] = ",/", *cad_aux;
+    cad_aux = strtok(fila, separador);
+    strcpy(titulo, cad_aux);
+    while (cad_aux != NULL){
+        if (cad_aux != NULL){
+            cad_aux = strtok(NULL, separador);
+            mes = atoi(cad_aux);
+            informacion[k].fecha[j].mes = mes;
+            cad_aux = strtok(NULL, separador);
+            anio = atoi(cad_aux);
+            informacion[k].fecha[j].anio = anio;
+            j++;
+            if ((j == 12)){
+                k++;
+                j = 0;
+            }
+            if (k != 0 && informacion[k-1].fecha[j].anio != atoi(cad_aux) && informacion[k-1].fecha[11].mes == 0){
+                k++;
+                j = 0;
+            }
+        }
+    }
+}
 
-//Energias* leer_archivo(char* filename, int* num_lines) {
-//    FILE *file = fopen(filename, "r");
-//    if (file == NULL) {
-//        printf("Error al abrir el archivo\n");
-//        return NULL;
-//    }
-//
-//    Energias* data = (Energias*) malloc(sizeof(Energias) * 100);
-//    int n = 0;
-//
-//    char line[1000];
-//    while (fgets(line, 1000, file) != NULL) {
-//        // Separa la línea por comas
-//        char *token = strtok(line, ",");
-//        int token_num = 0;
-//
-//        // Guarda el nombre de la energía
-//        strcpy(data[n].name, token);
-//
-//        // Guarda los valores como doubles
-//        while (token != NULL) {
-//            token = strtok(NULL, ",");
-//            if (token != NULL) {
-//                data[n].values[token_num] = strtod(token + (*token == '"'), NULL);
-//                token_num++;
-//            }
-//        }
-//
-//        // Guarda el número de valores en la estructura
-//        data[n].num_values = token_num;
-//
-//        // Incrementa el contador de líneas
-//        n++;
-//    }
-//
-//    // Cierra el archivo
-//    fclose(file);
-//
-//    // Actualiza el número de líneas
-//    *num_lines = n;
-//
-//    return data;
-//}
+void compilar_datos2(char fila[], Datos informacion[], int num_anios, int num_fuentes, int meses[]){
+    int i = 0, j = 0, k = 0;
+    char separador[] = {'"',','}, *cad_aux;
+    //puts(fila);
+    cad_aux = strtok(fila, separador);
+    if (cad_aux != NULL){
+        while (cad_aux != NULL){
+            cad_aux = strtok(NULL, separador);
+            if (cad_aux != NULL){
+                informacion[k].datos[num_fuentes].cantidad[i] = atof(cad_aux);
+                i++;
+                if (i == meses[k]){
+                    k++;
+                    i = 0;
+                }
+            }
+        }
+    }
+}
 
+
+void leer_titulo(char fila[], Datos informacion[], int num_anio, int num_fuente){
+    char *cad_aux, separador[] = ",";
+    int i = 0;
+    //puts(fila);
+    cad_aux = strtok(fila, separador);
+    strcpy(informacion[num_anio].datos[num_fuente].energia, cad_aux);
+}
 
 void convertir_caracteres_especiales(char *cadena) {
     char origen[] = {'á', 'é', 'í', 'ó', 'ú', 'ñ', 'ü'};
