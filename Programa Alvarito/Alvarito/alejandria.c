@@ -69,7 +69,6 @@ void compilar_datos2(char fila[], Datos informacion[], int num_anios, int num_fu
     }
 }
 
-
 void leer_titulo(char fila[], Datos informacion[], int num_anio, int num_fuente){
     char *cad_aux, separador[] = ",";
     int i = 0;
@@ -92,7 +91,7 @@ void convertir_caracteres_especiales(char *cadena) {
 
 void print_energy_type(Datos informacion[], int num_anios) {
     int seleccionenergia;
-    printf("Enter the energy type index (0-18): ");
+    printf("Introduzca el indice de energia (0-17): ");
     scanf("%d", &seleccionenergia);
     getchar(); // Consume the newline character
 
@@ -107,7 +106,7 @@ void print_energy_type(Datos informacion[], int num_anios) {
             }
         }
     } else {
-        printf("Invalid energy type index.\n");
+        printf("Seleccione una opcion valida.\n");
     }
 }
 
@@ -126,6 +125,63 @@ void imprimirTodo(Datos *valor_energia, int num_anio, int *num_mes_por_anio) {
         printf("\n");
         system("pause");
         system("cls");
+    }
+}
+
+void mostrarMenu(Datos *valor_energia, int num_anio, int *num_mes_por_anio, Datos informacion[], int num_anios) {
+    int choice, tam=10;
+
+    printf("Bienvenido a Electric.Camps de Camps.code y Dani\n");
+    printf("Alvaro Campos Coria\n Daniel Cervino Soto\n Alumnos del E-105");
+    printf("\n");
+    system("pause");
+    system("cls");
+    printf("Se recomienda al usuario hacer uso de la consulta de indices de energia\n");
+    system("pause");
+    system("cls");
+    do {
+
+        printf("1. Imprimir todos los valores\n");
+        printf("2. Imprimir un valor en concreto de energía\n");
+        printf("3. Consultar indices de energias\n");
+        printf("4. Salir\n");
+        printf("Ingrese su opción: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                imprimirTodo(valor_energia, num_anio, num_mes_por_anio);
+                system("pause");
+                system("cls");
+                break;
+            case 2:
+                print_energy_type(informacion, num_anios);
+                system("pause");
+                system("cls");
+                break;
+            case 3:
+                imprimirIndices(informacion);
+                system("pause");
+                system("cls");
+                break;
+            case 4:
+                printf("Saliendo del programa...\n");
+                break;
+            default:
+                printf("Opción inválida. Por favor, ingrese una opción válida.\n");
+                system("pause");
+                system("cls");
+                break;
+        }
+    } while (choice != 4);
+}
+
+
+void imprimirIndices(Datos informacion) {
+    int i;
+
+    for (i = 0; i < 18; i++) {
+        printf("%d. %s\n", i , informacion.datos[i].energia);
     }
 }
 

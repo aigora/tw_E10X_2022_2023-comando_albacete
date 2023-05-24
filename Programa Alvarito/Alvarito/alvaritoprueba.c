@@ -48,9 +48,6 @@ int main(){
         }
     }
 
-    system("pause");
-    system("cls");
-
     //Compilacion de datos 2.0
 
     memset(num_mes_por_anio, 0, 15);
@@ -72,17 +69,16 @@ int main(){
         }
         compilar_datos2(filas[m], valor_energia, num_anio, i, num_mes_por_anio);
     }
+    printf("Compilación de datos teminada...\n");
+    system("pause");
+    system("cls");
+    mostrarMenu(valor_energia,num_anio,num_mes_por_anio,valor_energia,num_anio);
 
-    //Imprimir tabla:
-//    print_energy_type(valor_energia, num_anio);
-
-    imprimirTodo(valor_energia,num_anio,num_mes_por_anio);
     free(fila);
     for (i = 0; i < 23; i++) {
         free(filas[i]);
     }
     free(filas);        //Liberamos la memoria.
-
 
     return 0;
 }
