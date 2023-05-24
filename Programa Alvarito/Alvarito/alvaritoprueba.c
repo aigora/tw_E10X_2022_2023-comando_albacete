@@ -48,14 +48,6 @@ int main(){
         }
     }
 
-    for ( i = 0; i < num_anio; i++){
-        for ( j = 0; j < 12; j++){
-            if (valor_energia[i].fecha[j].mes != 0){
-                printf("%i/%i\n\n",valor_energia[i].fecha[j].mes, valor_energia[i].fecha[j].anio);
-            }
-        }
-    }
-
     system("pause");
     system("cls");
 
@@ -84,18 +76,7 @@ int main(){
     //Imprimir tabla:
 //    print_energy_type(valor_energia, num_anio);
 
-
-    for ( k = 0; k < 18; k++){
-        printf("%s:\n", valor_energia[0].datos[k].energia);
-        for ( j = 0; j < num_anio; j++){
-            for ( i = 0; i < num_mes_por_anio[j]; i++){
-               printf("%i/%i: %.15f\n", valor_energia[j].fecha[i].mes, valor_energia[j].fecha[i].anio, valor_energia[j].datos[k].cantidad[i]);
-            }
-        }
-        system("pause");
-        system("cls");
-    }
-
+    imprimirTodo(valor_energia,num_anio,num_mes_por_anio);
     free(fila);
     for (i = 0; i < 23; i++) {
         free(filas[i]);

@@ -1,15 +1,15 @@
 # depslib dependency file v1.0
 1683824995 source:c:\users\34679\documents\github\tw_e10x_2022_2023-comando_albacete\programa alvarito\alvarito\alvaritomain.c
 
-1684506282 source:c:\users\34679\documents\github\tw_e10x_2022_2023-comando_albacete\programa alvarito\alvarito\alejandria.c
+1684944334 source:c:\users\34679\documents\github\tw_e10x_2022_2023-comando_albacete\programa alvarito\alvarito\alejandria.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
 	<string.h>
 
-1684506282 c:\users\34679\documents\github\tw_e10x_2022_2023-comando_albacete\programa alvarito\alvarito\alejandria.h
+1684943581 c:\users\34679\documents\github\tw_e10x_2022_2023-comando_albacete\programa alvarito\alvarito\alejandria.h
 
-1684506535 source:c:\users\34679\documents\github\tw_e10x_2022_2023-comando_albacete\programa alvarito\alvarito\alvaritoprueba.c
+1684944334 source:c:\users\34679\documents\github\tw_e10x_2022_2023-comando_albacete\programa alvarito\alvarito\alvaritoprueba.c
 	"stdio.h"
 	"math.h"
 	"string.h"

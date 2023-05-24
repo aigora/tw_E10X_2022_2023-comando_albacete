@@ -111,5 +111,21 @@ void print_energy_type(Datos informacion[], int num_anios) {
     }
 }
 
+void imprimirTodo(Datos *valor_energia, int num_anio, int *num_mes_por_anio) {
+    int i, j, k;
 
+    for (k = 0; k < 18; k++) {
+        printf("%s:\n", valor_energia[0].datos[k].energia);
+
+        for (i = 0; i < num_anio; i++) {
+            for (j = 0; j < num_mes_por_anio[i]; j++) {
+                printf("%i/%i: %.15f\n", valor_energia[i].fecha[j].mes, valor_energia[i].fecha[j].anio, valor_energia[i].datos[k].cantidad[j]);
+            }
+        }
+
+        printf("\n");
+        system("pause");
+        system("cls");
+    }
+}
 
