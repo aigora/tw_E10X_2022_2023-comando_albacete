@@ -1,14 +1,15 @@
 # depslib dependency file v1.0
 1683824995 source:c:\users\34679\documents\github\tw_e10x_2022_2023-comando_albacete\programa alvarito\alvarito\alvaritomain.c
 
-1685014945 source:c:\users\34679\documents\github\tw_e10x_2022_2023-comando_albacete\programa alvarito\alvarito\alejandria.c
+1685032873 source:c:\users\34679\documents\github\tw_e10x_2022_2023-comando_albacete\programa alvarito\alvarito\alejandria.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
 	<string.h>
 	<float.h>
+	<locale.h>
 
-1685013556 c:\users\34679\documents\github\tw_e10x_2022_2023-comando_albacete\programa alvarito\alvarito\alejandria.h
+1685032243 c:\users\34679\documents\github\tw_e10x_2022_2023-comando_albacete\programa alvarito\alvarito\alejandria.h
 
 1685014485 source:c:\users\34679\documents\github\tw_e10x_2022_2023-comando_albacete\programa alvarito\alvarito\alvaritoprueba.c
 	"stdio.h"
@@ -17,4 +18,14 @@
 	"stdlib.h"
 	"ctype.h"
 	"alejandria.h"
+
+1685032733 source:c:\users\34679\documents\github\tw_e10x_2022_2023-comando_albacete\programa alvarito\alvarito\alvarito.c
+	"stdio.h"
+	"math.h"
+	"string.h"
+	"stdlib.h"
+	"ctype.h"
+	"alejandria.h"
+	<locale.h>
+	<windows.h>
 

@@ -3,6 +3,7 @@
 #include<ctype.h>
 #include<string.h>
 #include <float.h>
+#include<locale.h>
 
 typedef struct
 {
@@ -50,7 +51,7 @@ void compilar_fechas(char fila[], Datos informacion[]){
     }
 }
 
-void compilar_datos2(char fila[], Datos informacion[], int num_anios, int num_fuentes, int meses[]){
+void compilar(char fila[], Datos informacion[], int num_anios, int num_fuentes, int meses[]){
     int i = 0, j = 0, k = 0;
     char separador[] = {'"',','}, *cad_aux;
     //puts(fila);
@@ -70,7 +71,7 @@ void compilar_datos2(char fila[], Datos informacion[], int num_anios, int num_fu
     }
 }
 
-void leer_titulo(char fila[], Datos informacion[], int num_anio, int num_fuente){
+void titulos(char fila[], Datos informacion[], int num_anio, int num_fuente){
     char *cad_aux, separador[] = ",";
     int i = 0;
     //puts(fila);
@@ -79,8 +80,9 @@ void leer_titulo(char fila[], Datos informacion[], int num_anio, int num_fuente)
 }
 
 void print_energy_type(Datos informacion[], int num_anios) {
+    setlocale(LC_CTYPE, "");
     int seleccionenergia;
-    printf("Introduzca el indice de energia (0-17): ");
+    printf("Introduzca el índice de energia (0-17): ");
     scanf("%d", &seleccionenergia);
     getchar(); // Consume the newline character
 
@@ -101,7 +103,7 @@ void print_energy_type(Datos informacion[], int num_anios) {
 
 void imprimirTodo(Datos *valor_energia, int num_anio, int *num_mes_por_anio) {
     int i, j, k;
-
+    setlocale(LC_CTYPE, "");
     for (k = 0; k < 18; k++) {
         printf("%s:\n", valor_energia[0].datos[k].energia);
 
@@ -118,14 +120,22 @@ void imprimirTodo(Datos *valor_energia, int num_anio, int *num_mes_por_anio) {
 }
 
 void mostrarMenu(Datos *valor_energia, int num_anio, int *num_mes_por_anio, Datos informacion[], int num_anios) {
-    int choice, tam=10;
+    int selecciona, tam=10;
+    char selecciona2;
+    setlocale(LC_CTYPE, "");
 
+    FILE *chapa, *chapa2, *chapafinal;
+    chapa = fopen("muchachapa.txt","r");
+    chapa2 = fopen("muchisimachapa.txt","r");
     printf("Bienvenido a Electric.Camps de Camps.code\n");
-    printf("Alvaro Campos Coria\n Alumno del E-105");
+    printf("Álvaro Campos Coria\n Alumno del E-105");
     printf("\n");
     system("pause");
     system("cls");
-    printf("Se recomienda al usuario hacer uso de la consulta de indices de energia\n");
+    printf("Se recomienda al usuario hacer uso de la consulta de índices de energia\n");
+    system("pause");
+    system("cls");
+    printf("Perdone si algunos carácteres del idioma español no aparecen en pantalla de la manera adecuada\n");
     system("pause");
     system("cls");
     do {
@@ -138,9 +148,9 @@ void mostrarMenu(Datos *valor_energia, int num_anio, int *num_mes_por_anio, Dato
         printf("6. Miscelanea de datos\n");
         printf("7. Salir\n");
         printf("Ingrese su opción: ");
-        scanf("%d", &choice);
+        scanf("%d", &selecciona);
 
-        switch (choice) {
+        switch (selecciona) {
             case 2:
                 imprimirTodo(valor_energia, num_anio, num_mes_por_anio);
                 system("pause");
@@ -170,6 +180,7 @@ void mostrarMenu(Datos *valor_energia, int num_anio, int *num_mes_por_anio, Dato
                 miscelanea(informacion, num_anios);
                 system("pause");
                 system("cls");
+                darlachapa();
                 break;
             case 7:
                 printf("Saliendo del programa...\n");
@@ -180,13 +191,13 @@ void mostrarMenu(Datos *valor_energia, int num_anio, int *num_mes_por_anio, Dato
                 system("cls");
                 break;
         }
-    } while (choice != 7);
+    } while (selecciona != 7);
 }
 
 
 void imprimirIndices(Datos informacion) {
     int i;
-
+    setlocale(LC_CTYPE, "");
     for (i = 0; i < 18; i++) {
         printf("%d. %s\n", i , informacion.datos[i].energia);
     }
@@ -194,6 +205,7 @@ void imprimirIndices(Datos informacion) {
 
 void calcularMedia(Datos *informacion, int num_anios) {
     int index;
+    setlocale(LC_CTYPE, "");
     printf("Ingrese el índice de la energía (0-16): ");
     scanf("%d", &index);
     if (index < 0 || index > 16) {
@@ -201,7 +213,7 @@ void calcularMedia(Datos *informacion, int num_anios) {
         return;
     }
     for (int i = 0; i < num_anios-1; i++) {
-        printf("Anio: %d\n", informacion[i].fecha[0].anio);
+        printf("Año: %d\n", informacion[i].fecha[0].anio);
         double sum = 0;
         for (int k = 0; k < 12; k++) {
             sum += informacion[i].datos[index].cantidad[k];
@@ -213,6 +225,7 @@ void calcularMedia(Datos *informacion, int num_anios) {
 
 void calcularMinimoMaximo(Datos *informacion, int num_anios) {
     int index;
+    setlocale(LC_CTYPE, "");
     printf("Ingrese el índice de la energía (0-16): ");
     scanf("%d", &index);
     if (index < 0 || index > 16) {
@@ -220,7 +233,7 @@ void calcularMinimoMaximo(Datos *informacion, int num_anios) {
         return;
     }
     for (int i = 0; i < num_anios-1; i++) {
-        printf("anio: %d\n", informacion[i].fecha[0].anio);
+        printf("año: %d\n", informacion[i].fecha[0].anio);
         double min = informacion[i].datos[index].cantidad[0];
         double max = informacion[i].datos[index].cantidad[0];
         int min_mes = 0;
@@ -236,12 +249,13 @@ void calcularMinimoMaximo(Datos *informacion, int num_anios) {
             }
         }
         printf("%s\n", informacion[i].datos[index].energia);
-        printf("Minimo: %.2f (Mes: %d)\n", min, min_mes + 1);
-        printf("Maximo: %.2f (Mes: %d)\n", max, max_mes + 1);
+        printf("Mínimo: %.2f (Mes: %d)\n", min, min_mes + 1);
+        printf("Máximo: %.2f (Mes: %d)\n", max, max_mes + 1);
     }
 }
 
 void miscelanea(Datos *informacion, int num_anios) {
+    setlocale(LC_CTYPE, "");
     double max_total = 0;
     int max_anio = 0;
     int max_mes = 0;
@@ -258,7 +272,7 @@ void miscelanea(Datos *informacion, int num_anios) {
             }
         }
     }
-    printf("Produccion maxima: %.2f (Energia: %s, Mes: %d, Anio: %d)\n", max_total, informacion[max_anio].datos[max_fuente].energia, max_mes + 1, informacion[max_anio].fecha[0].anio);
+    printf("Producción máxima: %.2f (Energia: %s, Mes: %d, Año: %d)\n", max_total, informacion[max_anio].datos[max_fuente].energia, max_mes + 1, informacion[max_anio].fecha[0].anio);
 
     for (int i = 0; i < num_anios-1; i++) {
         double max_media = 0;
@@ -280,8 +294,37 @@ void miscelanea(Datos *informacion, int num_anios) {
                 min_fuente_media = j;
             }
         }
-        printf("Anio: %d\n", informacion[i].fecha[0].anio);
+        printf("Año: %d\n", informacion[i].fecha[0].anio);
         printf("Maxima media: %.2f (Energia: %s)\n", max_media, informacion[i].datos[max_fuente_media].energia);
         printf("Minima media: %.2f (Energia: %s)\n", min_media, informacion[i].datos[min_fuente_media].energia);
+    }
+}
+
+void darlachapa() {
+    setlocale(LC_ALL, "spanish");
+    int i=0;
+    char *archivos[] = {"muchachapa.txt", "muchisimachapa.txt", "chapafinal.txt"};
+    char *nombres[] = {"Energía Eólica", "Ciclo combinado", "Conclusiones sobre ambas energías"};
+    for ( i = 0; i < 3; i++) {
+        printf("¿Desea ver el archivo %d: %s? (s/n): ", i+1, nombres[i]);
+        char respuesta;
+        scanf(" %c", &respuesta);
+        if (respuesta == 's' || respuesta == 'S') {
+            printf("Archivo: %s\n", nombres[i]);
+            FILE *fp = fopen(archivos[i], "r");
+            if (fp == NULL) {
+                printf("Error al abrir el archivo.\n");
+                continue;
+            }
+            char c;
+            while ((c = fgetc(fp)) != EOF) {
+                putchar(c);
+            }
+            fclose(fp);
+            system("pause");
+            system("cls");
+        }
+        system("pause");
+        system("cls");
     }
 }

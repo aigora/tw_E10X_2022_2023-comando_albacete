@@ -4,10 +4,11 @@
 #include "stdlib.h"
 #include "ctype.h"
 #include"alejandria.h"
+#include<locale.h>
 
 
 int main(){
-
+    setlocale(LC_CTYPE, "");
     int i = 0, j = 0, k = 0, t = 0, num_datos = 0, num_anio = 0, m = 0, num_mes_por_anio[15], num_mes = 0;
     FILE *archivo;
     char* fila = malloc(10000 * sizeof(char));
@@ -65,9 +66,9 @@ int main(){
         for ( j = 0; j < num_anio; j++){
             memset(fila, 0, 10000);
             strcpy(fila, filas[m]);
-            leer_titulo(fila, valor_energia, j, i);
+            titulos(fila, valor_energia, j, i);
         }
-        compilar_datos2(filas[m], valor_energia, num_anio, i, num_mes_por_anio);
+        compilar(filas[m], valor_energia, num_anio, i, num_mes_por_anio);
     }
     printf("Compilación de datos teminada...\n");
     system("pause");
