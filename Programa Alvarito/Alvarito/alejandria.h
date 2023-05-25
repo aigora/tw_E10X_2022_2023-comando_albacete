@@ -30,3 +30,4 @@ void print_energy_type(Datos informacion[], int num_anios);
 void imprimirTodo(Datos *valor_energia, int num_anio, int *num_mes_por_anio);
 void mostrarMenu(Datos *valor_energia, int num_anio, int *num_mes_por_anio, Datos informacion[], int num_anios);
 void imprimirIndices(Datos informacion);
+void calcularMedia(Datos *informacion, int num_anios);

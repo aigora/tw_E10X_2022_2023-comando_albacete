@@ -131,8 +131,8 @@ void imprimirTodo(Datos *valor_energia, int num_anio, int *num_mes_por_anio) {
 void mostrarMenu(Datos *valor_energia, int num_anio, int *num_mes_por_anio, Datos informacion[], int num_anios) {
     int choice, tam=10;
 
-    printf("Bienvenido a Electric.Camps de Camps.code y Dani\n");
-    printf("Alvaro Campos Coria\n Daniel Cervino Soto\n Alumnos del E-105");
+    printf("Bienvenido a Electric.Camps de Camps.code\n");
+    printf("Alvaro Campos Coria\n Alumno del E-105");
     printf("\n");
     system("pause");
     system("cls");
@@ -144,7 +144,8 @@ void mostrarMenu(Datos *valor_energia, int num_anio, int *num_mes_por_anio, Dato
         printf("1. Imprimir todos los valores\n");
         printf("2. Imprimir un valor en concreto de energía\n");
         printf("3. Consultar indices de energias\n");
-        printf("4. Salir\n");
+        printf("4. Calcular media\n");
+        printf("5. Salir\n");
         printf("Ingrese su opción: ");
         scanf("%d", &choice);
 
@@ -165,6 +166,11 @@ void mostrarMenu(Datos *valor_energia, int num_anio, int *num_mes_por_anio, Dato
                 system("cls");
                 break;
             case 4:
+                calcularMedia(informacion,num_anio);
+                system("pause");
+                system("cls");
+                break;
+            case 5:
                 printf("Saliendo del programa...\n");
                 break;
             default:
@@ -173,7 +179,7 @@ void mostrarMenu(Datos *valor_energia, int num_anio, int *num_mes_por_anio, Dato
                 system("cls");
                 break;
         }
-    } while (choice != 4);
+    } while (choice != 5);
 }
 
 
@@ -185,3 +191,21 @@ void imprimirIndices(Datos informacion) {
     }
 }
 
+void calcularMedia(Datos *informacion, int num_anios) {
+    int index;
+    printf("Ingrese el índice de la energía (0-16): ");
+    scanf("%d", &index);
+    if (index < 0 || index > 16) {
+        printf("Índice inválido.\n");
+        return;
+    }
+    for (int i = 0; i < num_anios-1; i++) {
+        printf("Anio: %d\n", informacion[i].fecha[0].anio);
+        double sum = 0;
+        for (int k = 0; k < 12; k++) {
+            sum += informacion[i].datos[index].cantidad[k];
+        }
+        double media = sum / 12;
+        printf("%s: %.5f\n", informacion[i].datos[index].energia, media);
+    }
+}
