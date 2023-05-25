@@ -78,18 +78,6 @@ void leer_titulo(char fila[], Datos informacion[], int num_anio, int num_fuente)
     strcpy(informacion[num_anio].datos[num_fuente].energia, cad_aux);
 }
 
-void convertir_caracteres_especiales(char *cadena) {
-    char origen[] = {'á', 'é', 'í', 'ó', 'ú', 'ñ', 'ü'};
-    char destino[] = {'a', 'e', 'i', 'o', 'u', 'n', 'u'};
-    for (int i = 0; i < strlen(cadena); i++) {
-        for (int j = 0; j < sizeof(origen); j++) {
-            if (cadena[i] == origen[j]) {
-                cadena[i] = destino[j];
-            }
-        }
-    }
-}
-
 void print_energy_type(Datos informacion[], int num_anios) {
     int seleccionenergia;
     printf("Introduzca el indice de energia (0-17): ");
@@ -142,9 +130,9 @@ void mostrarMenu(Datos *valor_energia, int num_anio, int *num_mes_por_anio, Dato
     system("cls");
     do {
 
-        printf("1. Imprimir todos los valores\n");
-        printf("2. Imprimir un valor en concreto de energía\n");
-        printf("3. Consultar indices de energias\n");
+        printf("1. Consultar indices de energias\n");
+        printf("2. Imprimir todos los valores\n");
+        printf("3. Imprimir un valor en concreto de energía\n");
         printf("4. Calcular media\n");
         printf("5. Maximo y minimo de energias\n");
         printf("6. Miscelanea de datos\n");
@@ -153,17 +141,17 @@ void mostrarMenu(Datos *valor_energia, int num_anio, int *num_mes_por_anio, Dato
         scanf("%d", &choice);
 
         switch (choice) {
-            case 1:
+            case 2:
                 imprimirTodo(valor_energia, num_anio, num_mes_por_anio);
                 system("pause");
                 system("cls");
                 break;
-            case 2:
+            case 3:
                 print_energy_type(informacion, num_anios);
                 system("pause");
                 system("cls");
                 break;
-            case 3:
+            case 1:
                 imprimirIndices(informacion);
                 system("pause");
                 system("cls");
