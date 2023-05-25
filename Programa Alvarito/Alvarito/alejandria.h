@@ -28,3 +28,4 @@ void calcularMedia(Datos *informacion, int num_anios);
 void calcularMinimoMaximo(Datos *informacion, int num_anios);
 void miscelanea(Datos *informacion, int num_anios);
 void darlachapa();
+void archivoBacano(Datos informacion[], int num_anios);

@@ -146,7 +146,8 @@ void mostrarMenu(Datos *valor_energia, int num_anio, int *num_mes_por_anio, Dato
         printf("4. Calcular media\n");
         printf("5. Maximo y minimo de energias\n");
         printf("6. Miscelanea de datos\n");
-        printf("7. Salir\n");
+        printf("7. Creación de archivo con datos personalizados\n");
+        printf("8. Salir\n");
         printf("Ingrese su opción: ");
         scanf("%d", &selecciona);
 
@@ -183,6 +184,9 @@ void mostrarMenu(Datos *valor_energia, int num_anio, int *num_mes_por_anio, Dato
                 darlachapa();
                 break;
             case 7:
+                archivoBacano(informacion,num_anios);
+                break;
+            case 8:
                 printf("Saliendo del programa...\n");
                 break;
             default:
@@ -191,7 +195,7 @@ void mostrarMenu(Datos *valor_energia, int num_anio, int *num_mes_por_anio, Dato
                 system("cls");
                 break;
         }
-    } while (selecciona != 7);
+    } while (selecciona != 8);
 }
 
 
@@ -327,4 +331,29 @@ void darlachapa() {
         system("pause");
         system("cls");
     }
+}
+
+void archivoBacano(Datos informacion[], int num_anios) {
+    int indice;
+    printf("Ingrese el índice de la energía (0-17): ");
+    scanf("%d", &indice);
+    if (indice < 0 || indice > 17) {
+        printf("Índice inválido\n");
+        return;
+    }
+    FILE *fp = fopen("EsMiEnergia.txt", "w");
+    if (fp == NULL) {
+        printf("No se pudo abrir el archivo\n");
+        return;
+    }
+    fprintf(fp,"%s\n",informacion[0].datos[indice].energia);
+    for (int i = 0; i < num_anios; i++) {
+        for (int j = 0; j < 12; j++) {
+            fprintf(fp, "%d/%d: %.2f\n", informacion[i].fecha[j].mes, informacion[i].fecha[j].anio, informacion[i].datos[indice].cantidad[j]);
+        }
+    }
+    printf("Añadido correctamente al archivo los datos sobre: %s\n",informacion[0].datos[indice].energia);
+    system("pause");
+    system("cls");
+    fclose(fp);
 }

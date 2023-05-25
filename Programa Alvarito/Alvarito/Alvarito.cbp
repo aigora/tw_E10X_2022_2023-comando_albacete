@@ -26,10 +26,7 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="alejandria.h" />
-		<Unit filename="alvaritomain.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="alvaritoprueba.c">
+		<Unit filename="alvarito.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Extensions>
