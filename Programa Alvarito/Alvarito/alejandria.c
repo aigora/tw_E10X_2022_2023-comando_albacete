@@ -2,6 +2,7 @@
 #include<stdlib.h>
 #include<ctype.h>
 #include<string.h>
+#include <float.h>
 
 typedef struct
 {
@@ -146,7 +147,8 @@ void mostrarMenu(Datos *valor_energia, int num_anio, int *num_mes_por_anio, Dato
         printf("3. Consultar indices de energias\n");
         printf("4. Calcular media\n");
         printf("5. Maximo y minimo de energias\n");
-        printf("6. Salir\n");
+        printf("6. Miscelanea de datos\n");
+        printf("7. Salir\n");
         printf("Ingrese su opción: ");
         scanf("%d", &choice);
 
@@ -177,6 +179,11 @@ void mostrarMenu(Datos *valor_energia, int num_anio, int *num_mes_por_anio, Dato
                 system("cls");
                 break;
             case 6:
+                miscelanea(informacion, num_anios);
+                system("pause");
+                system("cls");
+                break;
+            case 7:
                 printf("Saliendo del programa...\n");
                 break;
             default:
@@ -185,7 +192,7 @@ void mostrarMenu(Datos *valor_energia, int num_anio, int *num_mes_por_anio, Dato
                 system("cls");
                 break;
         }
-    } while (choice != 6);
+    } while (choice != 7);
 }
 
 
@@ -243,5 +250,50 @@ void calcularMinimoMaximo(Datos *informacion, int num_anios) {
         printf("%s\n", informacion[i].datos[index].energia);
         printf("Minimo: %.2f (Mes: %d)\n", min, min_mes + 1);
         printf("Maximo: %.2f (Mes: %d)\n", max, max_mes + 1);
+    }
+}
+
+void miscelanea(Datos *informacion, int num_anios) {
+    double max_total = 0;
+    int max_anio = 0;
+    int max_mes = 0;
+    int max_fuente = 0;
+    for (int i = 0; i < num_anios; i++) {
+        for (int j = 0; j < 17; j++) {
+            for (int k = 0; k < 12; k++) {
+                if (informacion[i].datos[j].cantidad[k] > max_total) {
+                    max_total = informacion[i].datos[j].cantidad[k];
+                    max_anio = i;
+                    max_mes = k;
+                    max_fuente = j;
+                }
+            }
+        }
+    }
+    printf("Produccion maxima: %.2f (Energia: %s, Mes: %d, Anio: %d)\n", max_total, informacion[max_anio].datos[max_fuente].energia, max_mes + 1, informacion[max_anio].fecha[0].anio);
+
+    for (int i = 0; i < num_anios-1; i++) {
+        double max_media = 0;
+        double min_media = DBL_MAX;
+        int max_fuente_media = 0;
+        int min_fuente_media = 0;
+        for (int j = 0; j < 17; j++) {
+            double sum = 0;
+            for (int k = 0; k < 12; k++) {
+                sum += informacion[i].datos[j].cantidad[k];
+            }
+            double media = sum / 12;
+            if (media > max_media) {
+                max_media = media;
+                max_fuente_media = j;
+            }
+            if (media < min_media) {
+                min_media = media;
+                min_fuente_media = j;
+            }
+        }
+        printf("Anio: %d\n", informacion[i].fecha[0].anio);
+        printf("Maxima media: %.2f (Energia: %s)\n", max_media, informacion[i].datos[max_fuente_media].energia);
+        printf("Minima media: %.2f (Energia: %s)\n", min_media, informacion[i].datos[min_fuente_media].energia);
     }
 }

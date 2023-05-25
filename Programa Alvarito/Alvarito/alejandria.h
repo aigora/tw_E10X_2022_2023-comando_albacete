@@ -26,3 +26,4 @@ void mostrarMenu(Datos *valor_energia, int num_anio, int *num_mes_por_anio, Dato
 void imprimirIndices(Datos informacion);
 void calcularMedia(Datos *informacion, int num_anios);
 void calcularMinimoMaximo(Datos *informacion, int num_anios);
+void miscelanea(Datos *informacion, int num_anios);
