@@ -145,7 +145,8 @@ void mostrarMenu(Datos *valor_energia, int num_anio, int *num_mes_por_anio, Dato
         printf("2. Imprimir un valor en concreto de energía\n");
         printf("3. Consultar indices de energias\n");
         printf("4. Calcular media\n");
-        printf("5. Salir\n");
+        printf("5. Maximo y minimo de energias\n");
+        printf("6. Salir\n");
         printf("Ingrese su opción: ");
         scanf("%d", &choice);
 
@@ -171,6 +172,11 @@ void mostrarMenu(Datos *valor_energia, int num_anio, int *num_mes_por_anio, Dato
                 system("cls");
                 break;
             case 5:
+                calcularMinimoMaximo(informacion, num_anios);
+                system("pause");
+                system("cls");
+                break;
+            case 6:
                 printf("Saliendo del programa...\n");
                 break;
             default:
@@ -179,7 +185,7 @@ void mostrarMenu(Datos *valor_energia, int num_anio, int *num_mes_por_anio, Dato
                 system("cls");
                 break;
         }
-    } while (choice != 5);
+    } while (choice != 6);
 }
 
 
@@ -207,5 +213,35 @@ void calcularMedia(Datos *informacion, int num_anios) {
         }
         double media = sum / 12;
         printf("%s: %.5f\n", informacion[i].datos[index].energia, media);
+    }
+}
+
+void calcularMinimoMaximo(Datos *informacion, int num_anios) {
+    int index;
+    printf("Ingrese el índice de la energía (0-16): ");
+    scanf("%d", &index);
+    if (index < 0 || index > 16) {
+        printf("Índice inválido.\n");
+        return;
+    }
+    for (int i = 0; i < num_anios-1; i++) {
+        printf("anio: %d\n", informacion[i].fecha[0].anio);
+        double min = informacion[i].datos[index].cantidad[0];
+        double max = informacion[i].datos[index].cantidad[0];
+        int min_mes = 0;
+        int max_mes = 0;
+        for (int k = 1; k < 12; k++) {
+            if (informacion[i].datos[index].cantidad[k] < min) {
+                min = informacion[i].datos[index].cantidad[k];
+                min_mes = k;
+            }
+            if (informacion[i].datos[index].cantidad[k] > max) {
+                max = informacion[i].datos[index].cantidad[k];
+                max_mes = k;
+            }
+        }
+        printf("%s\n", informacion[i].datos[index].energia);
+        printf("Minimo: %.2f (Mes: %d)\n", min, min_mes + 1);
+        printf("Maximo: %.2f (Mes: %d)\n", max, max_mes + 1);
     }
 }
