@@ -6,8 +6,6 @@ Creación de un programa que abra , analice y realize algunos cálculos matemát
 
 #Álvaro Campos Coria, Nº55764, E-105. alvaro.campos.coria@alumnos.upm.es
 
-#Iker Sádaba Ochoa, ikeerrs.
-
 #Daniel Cerviño Soto, Nº57023, E-105. daniel.cervino@alumnos.upm.es, daaannniiics.
 
 ## Objetivos del trabajo
@@ -26,6 +24,8 @@ Creación de un programa que abra , analice y realize algunos cálculos matemát
 
 -Máximo, mínimo y promedio de un tipo de energía.
 
-5-Creación de una biblioteca para guardar las funcionalidades más importantes.
+5-Creación de un archivo con datos personalizados, con los datos que el usuario quiera.
 
-6-Creación de una interfaz lo más user friendly posible.
+6-Creación de una biblioteca para guardar las funcionalidades más importantes.
+
+7-Creación de una interfaz lo más user friendly posible.
