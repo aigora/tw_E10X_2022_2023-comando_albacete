@@ -4,6 +4,7 @@
 #include<string.h>
 #include <float.h>
 #include<locale.h>
+#include<stdbool.h>
 
 typedef struct
 {
@@ -138,6 +139,9 @@ void mostrarMenu(Datos *valor_energia, int num_anio, int *num_mes_por_anio, Dato
     printf("Perdone si algunos carácteres del idioma español no aparecen en pantalla de la manera adecuada\n");
     system("pause");
     system("cls");
+    printf("Todas las cantidades de energía generada están en GWh\n");
+    system("pause");
+    system("cls");
     do {
 
         printf("1. Consultar indices de energias\n");
@@ -185,6 +189,8 @@ void mostrarMenu(Datos *valor_energia, int num_anio, int *num_mes_por_anio, Dato
                 break;
             case 7:
                 archivoBacano(informacion,num_anios);
+                system("pause");
+                system("cls");
                 break;
             case 8:
                 printf("Saliendo del programa...\n");
@@ -333,27 +339,70 @@ void darlachapa() {
     }
 }
 
-void archivoBacano(Datos informacion[], int num_anios) {
-    int indice;
-    printf("Ingrese el índice de la energía (0-17): ");
-    scanf("%d", &indice);
-    if (indice < 0 || indice > 17) {
-        printf("Índice inválido\n");
+
+void archivoBacano(Datos *informacion, int num_anios) {
+    int index;
+    setlocale(LC_CTYPE, "");
+    printf("Ingrese el índice de la energía (0-16): ");
+    scanf("%d", &index);
+    if (index < 0 || index > 16) {
+        printf("Índice inválido.\n");
         return;
     }
-    FILE *fp = fopen("EsMiEnergia.txt", "w");
-    if (fp == NULL) {
-        printf("No se pudo abrir el archivo\n");
-        return;
+    char opcion;
+    printf("¿Desea calcular la media de esta energía? %s (s/n): ", informacion[index].datos[index]);
+    scanf(" %c", &opcion);
+    bool calcularMedia = false;
+    if (opcion == 's' || opcion == 'S') {
+        calcularMedia = true;
     }
-    fprintf(fp,"%s\n",informacion[0].datos[indice].energia);
-    for (int i = 0; i < num_anios; i++) {
-        for (int j = 0; j < 12; j++) {
-            fprintf(fp, "%d/%d: %.2f\n", informacion[i].fecha[j].mes, informacion[i].fecha[j].anio, informacion[i].datos[indice].cantidad[j]);
+    printf("¿Desea calcular el mínimo y máximo de esta energía? (s/n): ");
+    scanf(" %c", &opcion);
+    bool calcularMinimoMaximo = false;
+    if (opcion == 's' || opcion == 'S') {
+        calcularMinimoMaximo = true;
+    }
+    if (calcularMedia || calcularMinimoMaximo) {
+        printf("¿Desea borrar los datos antiguos del archivo? (s/n): ");
+        scanf(" %c", &opcion);
+        FILE *fp;
+        if (opcion == 's' || opcion == 'S') {
+            fp = fopen("EsMiEnergia.txt", "w");
+        } else {
+            fp = fopen("EsMiEnergia.txt", "a");
         }
+        if (fp == NULL) {
+            printf("No se pudo abrir el archivo\n");
+            return;
+        }
+        for (int i = 0; i < num_anios-1; i++) {
+            fprintf(fp,"Año: %d\n", informacion[i].fecha[0].anio);
+            double min = informacion[i].datos[index].cantidad[0];
+            double max = informacion[i].datos[index].cantidad[0];
+            int min_mes = 0;
+            int max_mes = 0;
+            double sum = 0;
+            for (int k = 0; k < 12; k++) {
+                sum += informacion[i].datos[index].cantidad[k];
+                if (informacion[i].datos[index].cantidad[k] < min) {
+                    min = informacion[i].datos[index].cantidad[k];
+                    min_mes = k;
+                }
+                if (informacion[i].datos[index].cantidad[k] > max) {
+                    max = informacion[i].datos[index].cantidad[k];
+                    max_mes = k;
+                }
+            }
+            fprintf(fp,"%s\n", informacion[i].datos[index].energia);
+            if (calcularMedia) {
+                double media = sum / 12;
+                fprintf(fp,"Media: %.5f\n", media);
+            }
+            if (calcularMinimoMaximo) {
+                fprintf(fp,"Mínimo: %.2f (Mes: %d)\n", min, min_mes + 1);
+                fprintf(fp,"Máximo: %.2f (Mes: %d)\n", max, max_mes + 1);
+            }
+        }
+        fclose(fp);
     }
-    printf("Añadido correctamente al archivo los datos sobre: %s\n",informacion[0].datos[indice].energia);
-    system("pause");
-    system("cls");
-    fclose(fp);
 }
