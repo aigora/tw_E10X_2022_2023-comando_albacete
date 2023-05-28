@@ -27,26 +27,27 @@ typedef struct
 
 
 void compilar_fechas(char fila[], Datos informacion[]){
+        // Esta función se encarga de compilar las fechas en la estructura Datos
     int i = 0, j = 0, k = 0, mes = 0, anio = 0;
     char titulo[50], separador[] = ",/", *cad_aux;
-    cad_aux = strtok(fila, separador);
-    strcpy(titulo, cad_aux);
+    cad_aux = strtok(fila, separador); //se utiliza la función strtok para dividir la cadena fila en tokens utilizando los caracteres de separación.
+    strcpy(titulo, cad_aux); //Copiamos el primer token con strcpy a la cadena titulo
     while (cad_aux != NULL){
         if (cad_aux != NULL){
             cad_aux = strtok(NULL, separador);
-            mes = atoi(cad_aux);
+            mes = atoi(cad_aux); // se convierte el token a entero utilizando la función atoi y se asigna a la variable mes
             informacion[k].fecha[j].mes = mes;
             cad_aux = strtok(NULL, separador);
             anio = atoi(cad_aux);
-            informacion[k].fecha[j].anio = anio;
+            informacion[k].fecha[j].anio = anio; //El siguiente token (correspondiente al año) y se convierte a entero, asignándolo a la variable anio
             j++;
             if ((j == 12)){
                 k++;
                 j = 0;
             }
             if (k != 0 && informacion[k-1].fecha[j].anio != atoi(cad_aux) && informacion[k-1].fecha[11].mes == 0){
-                k++;
-                j = 0;
+                k++;   //comprobación para ver si k no es igual a 0 y si el año de la fecha anterior
+                j = 0;   //y si el mes de la última fecha del bloque anterior es 0 se incrementa k y se reinicia j a 0.
             }
         }
     }
@@ -55,17 +56,23 @@ void compilar_fechas(char fila[], Datos informacion[]){
 void compilar(char fila[], Datos informacion[], int num_anios, int num_fuentes, int meses[]){
     int i = 0, j = 0, k = 0;
     char separador[] = {'"',','}, *cad_aux;
-    //puts(fila);
+    // Separar la cadena en tokens usando el separador ","
     cad_aux = strtok(fila, separador);
+    // Comprobar si el primer token es diferente de NULL
     if (cad_aux != NULL){
+    // Recorrer todos los tokens restantes
         while (cad_aux != NULL){
+            // Obtener el siguiente token
             cad_aux = strtok(NULL, separador);
+            // Comprobar si el token actual no es NULL
             if (cad_aux != NULL){
+            // Convertir el token en un valor flotante y guardarlo en la estructura informacion
                 informacion[k].datos[num_fuentes].cantidad[i] = atof(cad_aux);
                 i++;
                 if (i == meses[k]){
+                // Comprobar si se han procesado todos los meses del año actual
                     k++;
-                    i = 0;
+                    i = 0; //Pasar al año siguiente y reiniciar contador de mes
                 }
             }
         }
@@ -75,23 +82,26 @@ void compilar(char fila[], Datos informacion[], int num_anios, int num_fuentes, 
 void titulos(char fila[], Datos informacion[], int num_anio, int num_fuente){
     char *cad_aux, separador[] = ",";
     int i = 0;
-    //puts(fila);
+    //separar la cadena en tokens usando como separador ","
     cad_aux = strtok(fila, separador);
+    //copiar el primer token a la estructura información
     strcpy(informacion[num_anio].datos[num_fuente].energia, cad_aux);
 }
 
 void print_energy_type(Datos informacion[], int num_anios) {
     setlocale(LC_CTYPE, "");
-    int seleccionenergia;
+    int seleccionenergia, i ,j;
     printf("Introduzca el índice de energia (0-17): ");
     scanf("%d", &seleccionenergia);
-    getchar(); // Consume the newline character
+    getchar(); // Consumir el carácter de la nueva línea
 
-    // Check if the energy type index is within the valid range
+    //Comprueba que el indice esta en el rango valido de energia.
     if (seleccionenergia >= 0 && seleccionenergia < 19) {
         printf("%s:\n", informacion[0].datos[seleccionenergia].energia);
-        for (int j = 0; j < num_anios; j++) {
-            for (int i = 0; i < 12; i++) {
+        //recorre los años y meses para imprimir los datos correspondientes a la energia seleccionada.
+        for (j = 0; j < num_anios; j++) {
+            for ( i = 0; i < 12; i++) {
+                // Comprobar si el mes es diferente de cero (indicando que hay datos disponibles)
                 if (informacion[j].fecha[i].mes != 0) {
                     printf("%d/%d: %.15f\n", informacion[j].fecha[i].mes, informacion[j].fecha[i].anio, informacion[j].datos[seleccionenergia].cantidad[i]);
                 }
@@ -105,11 +115,14 @@ void print_energy_type(Datos informacion[], int num_anios) {
 void imprimirTodo(Datos *valor_energia, int num_anio, int *num_mes_por_anio) {
     int i, j, k;
     setlocale(LC_CTYPE, "");
+    //Itera sobre los 18 tipos de energia que hay
     for (k = 0; k < 18; k++) {
         printf("%s:\n", valor_energia[0].datos[k].energia);
-
+        //Recorre cada año
         for (i = 0; i < num_anio; i++) {
+        //Recorre todos los meses del año en el que estamos
             for (j = 0; j < num_mes_por_anio[i]; j++) {
+            //Imprime toda la información
                 printf("%i/%i: %.15f\n", valor_energia[i].fecha[j].mes, valor_energia[i].fecha[j].anio, valor_energia[i].datos[k].cantidad[j]);
             }
         }
@@ -124,10 +137,6 @@ void mostrarMenu(Datos *valor_energia, int num_anio, int *num_mes_por_anio, Dato
     int selecciona, tam=10;
     char selecciona2;
     setlocale(LC_CTYPE, "");
-
-    FILE *chapa, *chapa2, *chapafinal;
-    chapa = fopen("muchachapa.txt","r");
-    chapa2 = fopen("muchisimachapa.txt","r");
     printf("Bienvenido a Electric.Camps de Camps.code\n");
     printf("Álvaro Campos Coria\n Alumno del E-105");
     printf("\n");
@@ -208,57 +217,63 @@ void mostrarMenu(Datos *valor_energia, int num_anio, int *num_mes_por_anio, Dato
 void imprimirIndices(Datos informacion) {
     int i;
     setlocale(LC_CTYPE, "");
+    //Recorre la estructura información
     for (i = 0; i < 18; i++) {
+        //Imprime los indices de todas las energias
         printf("%d. %s\n", i , informacion.datos[i].energia);
     }
 }
 
 void calcularMedia(Datos *informacion, int num_anios) {
-    int index;
+    int indice, i, k;
     setlocale(LC_CTYPE, "");
     printf("Ingrese el índice de la energía (0-16): ");
-    scanf("%d", &index);
-    if (index < 0 || index > 16) {
+    scanf("%d", &indice);
+    //Verifica que el indice esta dentro del rango válido.
+    if (indice < 0 || indice > 16) {
         printf("Índice inválido.\n");
         return;
     }
-    for (int i = 0; i < num_anios-1; i++) {
+    //Recorremos todos los años
+    for (i = 0; i < num_anios-1; i++) {
         printf("Año: %d\n", informacion[i].fecha[0].anio);
         double sum = 0;
-        for (int k = 0; k < 12; k++) {
-            sum += informacion[i].datos[index].cantidad[k];
+        //Calculamos la suma de los valores de energía de para el tipo de energía y año actual
+        for (k = 0; k < 12; k++) {
+            sum += informacion[i].datos[indice].cantidad[k];
         }
+        //Cálculo final de la media de ese año
         double media = sum / 12;
-        printf("%s: %.5f\n", informacion[i].datos[index].energia, media);
+        printf("%s: %.5f\n", informacion[i].datos[indice].energia, media);
     }
 }
 
 void calcularMinimoMaximo(Datos *informacion, int num_anios) {
-    int index;
+    int indice;
     setlocale(LC_CTYPE, "");
     printf("Ingrese el índice de la energía (0-16): ");
-    scanf("%d", &index);
-    if (index < 0 || index > 16) {
+    scanf("%d", &indice);
+    if (indice < 0 || indice > 16) {
         printf("Índice inválido.\n");
         return;
     }
     for (int i = 0; i < num_anios-1; i++) {
         printf("año: %d\n", informacion[i].fecha[0].anio);
-        double min = informacion[i].datos[index].cantidad[0];
-        double max = informacion[i].datos[index].cantidad[0];
+        double min = informacion[i].datos[indice].cantidad[0];
+        double max = informacion[i].datos[indice].cantidad[0];
         int min_mes = 0;
         int max_mes = 0;
         for (int k = 1; k < 12; k++) {
-            if (informacion[i].datos[index].cantidad[k] < min) {
-                min = informacion[i].datos[index].cantidad[k];
+            if (informacion[i].datos[indice].cantidad[k] < min) {
+                min = informacion[i].datos[indice].cantidad[k];
                 min_mes = k;
             }
-            if (informacion[i].datos[index].cantidad[k] > max) {
-                max = informacion[i].datos[index].cantidad[k];
+            if (informacion[i].datos[indice].cantidad[k] > max) {
+                max = informacion[i].datos[indice].cantidad[k];
                 max_mes = k;
             }
         }
-        printf("%s\n", informacion[i].datos[index].energia);
+        printf("%s\n", informacion[i].datos[indice].energia);
         printf("Mínimo: %.2f (Mes: %d)\n", min, min_mes + 1);
         printf("Máximo: %.2f (Mes: %d)\n", max, max_mes + 1);
     }
@@ -341,16 +356,16 @@ void darlachapa() {
 
 
 void archivoBacano(Datos *informacion, int num_anios) {
-    int index;
+    int indice;
     setlocale(LC_CTYPE, "");
     printf("Ingrese el índice de la energía (0-16): ");
-    scanf("%d", &index);
-    if (index < 0 || index > 16) {
+    scanf("%d", &indice);
+    if (indice < 0 || indice > 16) {
         printf("Índice inválido.\n");
         return;
     }
     char opcion;
-    printf("¿Desea calcular la media de esta energía? %s (s/n): ", informacion[index].datos[index]);
+    printf("¿Desea calcular la media de esta energía? %s (s/n): ", informacion[indice].datos[indice]);
     scanf(" %c", &opcion);
     bool calcularMedia = false;
     if (opcion == 's' || opcion == 'S') {
@@ -377,23 +392,23 @@ void archivoBacano(Datos *informacion, int num_anios) {
         }
         for (int i = 0; i < num_anios-1; i++) {
             fprintf(fp,"Año: %d\n", informacion[i].fecha[0].anio);
-            double min = informacion[i].datos[index].cantidad[0];
-            double max = informacion[i].datos[index].cantidad[0];
+            double min = informacion[i].datos[indice].cantidad[0];
+            double max = informacion[i].datos[indice].cantidad[0];
             int min_mes = 0;
             int max_mes = 0;
             double sum = 0;
             for (int k = 0; k < 12; k++) {
-                sum += informacion[i].datos[index].cantidad[k];
-                if (informacion[i].datos[index].cantidad[k] < min) {
-                    min = informacion[i].datos[index].cantidad[k];
+                sum += informacion[i].datos[indice].cantidad[k];
+                if (informacion[i].datos[indice].cantidad[k] < min) {
+                    min = informacion[i].datos[indice].cantidad[k];
                     min_mes = k;
                 }
-                if (informacion[i].datos[index].cantidad[k] > max) {
-                    max = informacion[i].datos[index].cantidad[k];
+                if (informacion[i].datos[indice].cantidad[k] > max) {
+                    max = informacion[i].datos[indice].cantidad[k];
                     max_mes = k;
                 }
             }
-            fprintf(fp,"%s\n", informacion[i].datos[index].energia);
+            fprintf(fp,"%s\n", informacion[i].datos[indice].energia);
             if (calcularMedia) {
                 double media = sum / 12;
                 fprintf(fp,"Media: %.5f\n", media);

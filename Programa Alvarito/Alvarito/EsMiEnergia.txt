@@ -1,30 +1,18 @@
 Año: 2021
-Fuel + Gas
-Media: -0.00000
-Mínimo: -0.00 (Mes: 7)
-Máximo: 0.00 (Mes: 1)
+Ciclo combinado
+Mínimo: 1544.07 (Mes: 2)
+Máximo: 6317.64 (Mes: 11)
 Año: 2022
-Fuel + Gas
-Media: 0.00000
-Mínimo: 0.00 (Mes: 1)
-Máximo: 0.00 (Mes: 1)
+Ciclo combinado
+Mínimo: 3146.87 (Mes: 4)
+Máximo: 8460.46 (Mes: 7)
 Año: 2021
-Motores diésel
-Media: 209.78534
-Mínimo: 160.42 (Mes: 2)
-Máximo: 258.86 (Mes: 8)
+Hidráulica
+Media: 2468.83409
+Mínimo: 1023.22 (Mes: 10)
+Máximo: 4517.60 (Mes: 2)
 Año: 2022
-Motores diésel
-Media: 212.35030
-Mínimo: 185.58 (Mes: 2)
-Máximo: 245.67 (Mes: 8)
-Año: 2021
-Turbinación bombeo
-Media: 220.77702
-Mínimo: 105.71 (Mes: 6)
-Máximo: 401.29 (Mes: 2)
-Año: 2022
-Turbinación bombeo
-Media: 314.63057
-Mínimo: 215.64 (Mes: 1)
-Máximo: 485.36 (Mes: 12)
+Hidráulica
+Media: 1488.58665
+Mínimo: 717.70 (Mes: 10)
+Máximo: 2744.81 (Mes: 12)
