@@ -133,7 +133,7 @@ void imprimirTodo(Datos *valor_energia, int num_anio, int *num_mes_por_anio) {
 }
 
 void mostrarMenu(Datos *valor_energia, int num_anio, int *num_mes_por_anio, Datos informacion[], int num_anios) {
-    int selecciona, tam=10;
+    int selecciona;
     char selecciona2;
     setlocale(LC_CTYPE, "");
     printf("Bienvenido a Electric.Camps de Camps.code\n");
