@@ -4,9 +4,9 @@ Creación de un programa que abra , analice y realize algunos cálculos matemát
 
 ## Integrantes del equipo
 
-#Álvaro Campos Coria, Nº55764, E-105. alvaro.campos.coria@alumnos.upm.es
+Álvaro Campos Coria, Nº55764, E-105. alvaro.campos.coria@alumnos.upm.es
 
-#Daniel Cerviño Soto, Nº57023, E-105. daniel.cervino@alumnos.upm.es, daaannniiics.
+Daniel Cerviño Soto, Nº57023, E-105. daniel.cervino@alumnos.upm.es, daaannniiics.
 
 ## Objetivos del trabajo
 
