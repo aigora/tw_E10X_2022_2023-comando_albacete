@@ -1,11 +1,8 @@
 Año: 2021
 Ciclo combinado
+Media: 3708.34161
 Mínimo: 1544.07 (Mes: 2)
 Máximo: 6317.64 (Mes: 11)
-Año: 2022
-Ciclo combinado
-Mínimo: 3146.87 (Mes: 4)
-Máximo: 8460.46 (Mes: 7)
 Año: 2021
 Hidráulica
 Media: 2468.83409

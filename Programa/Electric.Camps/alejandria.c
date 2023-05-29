@@ -234,7 +234,7 @@ void calcularMedia(Datos *informacion, int num_anios) {
         return;
     }
     //Recorremos todos los años
-    for (i = 0; i < num_anios-1; i++) {
+    for (i = 0; i < num_anios; i++) {
         printf("Año: %d\n", informacion[i].fecha[0].anio);
         double sum = 0;
         //Calculamos la suma de los valores de energía de para el tipo de energía y año actual
@@ -259,7 +259,7 @@ void calcularMinimoMaximo(Datos *informacion, int num_anios) {
         return;
     }
     //Bucle para recorrer cada año
-    for (int i = 0; i < num_anios-1; i++) {
+    for (int i = 0; i < num_anios; i++) {
         printf("año: %d\n", informacion[i].fecha[0].anio);
         double min = informacion[i].datos[indice].cantidad[0];
         double max = informacion[i].datos[indice].cantidad[0];
@@ -305,7 +305,7 @@ void miscelanea(Datos *informacion, int num_anios) {
     // Imprimir el valor máximo y su información relacionada
     printf("Producción máxima: %.2f (Energia: %s, Mes: %d, Año: %d)\n", max_total, informacion[max_anio].datos[max_fuente].energia, max_mes + 1, informacion[max_anio].fecha[0].anio);
     // Calcular y mostrar las medias máxima y mínima de energía por año
-    for (int i = 0; i < num_anios-1; i++) {
+    for (int i = 0; i < num_anios; i++) {
         double max_media = 0;
         double min_media = DBL_MAX; //La constante DBL_MAX representa el valor máximo finito representable de tipo double. Utilizada para establecer un valor inicial alto para min_media
         int max_fuente_media = 0;
@@ -408,7 +408,7 @@ void archivoBacano(Datos *informacion, int num_anios) {
             return;
         }
         // Calcular la media, mínimo y máximo de la energía para cada año
-        for (int i = 0; i < num_anios-1; i++) {
+        for (int i = 0; i < num_anios; i++) {
             fprintf(fp,"Año: %d\n", informacion[i].fecha[0].anio);
             double min = informacion[i].datos[indice].cantidad[0];
             double max = informacion[i].datos[indice].cantidad[0];
