@@ -251,18 +251,22 @@ void calcularMedia(Datos *informacion, int num_anios) {
 void calcularMinimoMaximo(Datos *informacion, int num_anios) {
     int indice;
     setlocale(LC_CTYPE, "");
+    //Solicita al usuario el índice de energía
     printf("Ingrese el índice de la energía (0-16): ");
     scanf("%d", &indice);
+    //Verficamos si el indice está dentro del rango
     if (indice < 0 || indice > 16) {
         printf("Índice inválido.\n");
         return;
     }
+    //Bucle para recorrer cada año
     for (int i = 0; i < num_anios-1; i++) {
         printf("año: %d\n", informacion[i].fecha[0].anio);
         double min = informacion[i].datos[indice].cantidad[0];
         double max = informacion[i].datos[indice].cantidad[0];
         int min_mes = 0;
         int max_mes = 0;
+        // Encontrar el valor mínimo y máximo de energía y sus respectivos meses
         for (int k = 1; k < 12; k++) {
             if (informacion[i].datos[indice].cantidad[k] < min) {
                 min = informacion[i].datos[indice].cantidad[k];
@@ -273,6 +277,7 @@ void calcularMinimoMaximo(Datos *informacion, int num_anios) {
                 max_mes = k;
             }
         }
+        // Imprimir los resultados
         printf("%s\n", informacion[i].datos[indice].energia);
         printf("Mínimo: %.2f (Mes: %d)\n", min, min_mes + 1);
         printf("Máximo: %.2f (Mes: %d)\n", max, max_mes + 1);
@@ -285,6 +290,7 @@ void miscelanea(Datos *informacion, int num_anios) {
     int max_anio = 0;
     int max_mes = 0;
     int max_fuente = 0;
+    // Encontrar el valor máximo de energía en toda la información
     for (int i = 0; i < num_anios; i++) {
         for (int j = 0; j < 17; j++) {
             for (int k = 0; k < 12; k++) {
@@ -297,8 +303,9 @@ void miscelanea(Datos *informacion, int num_anios) {
             }
         }
     }
+    // Imprimir el valor máximo y su información relacionada
     printf("Producción máxima: %.2f (Energia: %s, Mes: %d, Año: %d)\n", max_total, informacion[max_anio].datos[max_fuente].energia, max_mes + 1, informacion[max_anio].fecha[0].anio);
-
+    // Calcular y mostrar las medias máxima y mínima de energía por año
     for (int i = 0; i < num_anios-1; i++) {
         double max_media = 0;
         double min_media = DBL_MAX;
@@ -330,18 +337,22 @@ void darlachapa() {
     int i=0;
     char *archivos[] = {"muchachapa.txt", "muchisimachapa.txt", "chapafinal.txt"};
     char *nombres[] = {"Energía Eólica", "Ciclo combinado", "Conclusiones sobre ambas energías"};
+    // Iterar sobre cada archivo y nombre correspondiente
     for ( i = 0; i < 3; i++) {
         printf("¿Desea ver el archivo %d: %s? (s/n): ", i+1, nombres[i]);
         char respuesta;
         scanf(" %c", &respuesta);
+        // Verificar la respuesta del usuario
         if (respuesta == 's' || respuesta == 'S') {
             printf("Archivo: %s\n", nombres[i]);
             FILE *fp = fopen(archivos[i], "r");
+            // Verificar si se pudo abrir el archivo correctamente
             if (fp == NULL) {
                 printf("Error al abrir el archivo.\n");
                 continue;
             }
             char c;
+            // Leer y mostrar el contenido del archivo
             while ((c = fgetc(fp)) != EOF) {
                 putchar(c);
             }
@@ -358,20 +369,25 @@ void darlachapa() {
 void archivoBacano(Datos *informacion, int num_anios) {
     int indice;
     setlocale(LC_CTYPE, "");
+    // Solicitar al usuario el índice de la energía
     printf("Ingrese el índice de la energía (0-16): ");
     scanf("%d", &indice);
+    // Verificar si el índice es válido
     if (indice < 0 || indice > 16) {
         printf("Índice inválido.\n");
         return;
     }
     char opcion;
+    // Preguntar al usuario si desea calcular la media de esta energía
     printf("¿Desea calcular la media de esta energía? %s (s/n): ", informacion[indice].datos[indice]);
     scanf(" %c", &opcion);
     bool calcularMedia = false;
+    // Preguntar al usuario si desea calcular el mínimo y máximo de esta energía
     if (opcion == 's' || opcion == 'S') {
         calcularMedia = true;
     }
     printf("¿Desea calcular el mínimo y máximo de esta energía? (s/n): ");
+    // Preguntar al usuario si desea borrar los datos antiguos del archivo
     scanf(" %c", &opcion);
     bool calcularMinimoMaximo = false;
     if (opcion == 's' || opcion == 'S') {
@@ -381,15 +397,18 @@ void archivoBacano(Datos *informacion, int num_anios) {
         printf("¿Desea borrar los datos antiguos del archivo? (s/n): ");
         scanf(" %c", &opcion);
         FILE *fp;
+        // Abrir el archivo en modo de escritura o anexado según la respuesta del usuario
         if (opcion == 's' || opcion == 'S') {
             fp = fopen("EsMiEnergia.txt", "w");
         } else {
             fp = fopen("EsMiEnergia.txt", "a");
         }
+        // Verificar si se pudo abrir el archivo correctamente
         if (fp == NULL) {
             printf("No se pudo abrir el archivo\n");
             return;
         }
+        // Calcular la media, mínimo y máximo de la energía para cada año
         for (int i = 0; i < num_anios-1; i++) {
             fprintf(fp,"Año: %d\n", informacion[i].fecha[0].anio);
             double min = informacion[i].datos[indice].cantidad[0];
@@ -397,6 +416,7 @@ void archivoBacano(Datos *informacion, int num_anios) {
             int min_mes = 0;
             int max_mes = 0;
             double sum = 0;
+            // Calcular la suma, mínimo y máximo de la energía para cada mes
             for (int k = 0; k < 12; k++) {
                 sum += informacion[i].datos[indice].cantidad[k];
                 if (informacion[i].datos[indice].cantidad[k] < min) {
@@ -418,6 +438,7 @@ void archivoBacano(Datos *informacion, int num_anios) {
                 fprintf(fp,"Máximo: %.2f (Mes: %d)\n", max, max_mes + 1);
             }
         }
+        //Se cierra el archivo una vez terminado todos los procesos.
         fclose(fp);
     }
 }
