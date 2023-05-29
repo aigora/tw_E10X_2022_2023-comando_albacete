@@ -1,8 +1,6 @@
-#include "stdio.h"
-#include "math.h"
-#include "string.h"
-#include "stdlib.h"
-#include "ctype.h"
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 #include "alejandria.h"
 #include<locale.h>
 

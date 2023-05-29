@@ -1,10 +1,9 @@
 # depslib dependency file v1.0
 1683824995 source:c:\users\34679\documents\github\tw_e10x_2022_2023-comando_albacete\programa alvarito\alvarito\alvaritomain.c
 
-1685281716 source:c:\users\34679\documents\github\tw_e10x_2022_2023-comando_albacete\programa alvarito\alvarito\alejandria.c
+1685351222 source:c:\users\34679\documents\github\tw_e10x_2022_2023-comando_albacete\programa alvarito\alvarito\alejandria.c
 	<stdio.h>
 	<stdlib.h>
-	<ctype.h>
 	<string.h>
 	<float.h>
 	<locale.h>

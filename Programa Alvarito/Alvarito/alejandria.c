@@ -1,6 +1,5 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include<ctype.h>
 #include<string.h>
 #include <float.h>
 #include<locale.h>
@@ -27,7 +26,7 @@ typedef struct
 
 
 void compilar_fechas(char fila[], Datos informacion[]){
-        // Esta función se encarga de compilar las fechas en la estructura Datos
+    // Esta función se encarga de compilar las fechas en la estructura Datos
     int i = 0, j = 0, k = 0, mes = 0, anio = 0;
     char titulo[50], separador[] = ",/", *cad_aux;
     cad_aux = strtok(fila, separador); //se utiliza la función strtok para dividir la cadena fila en tokens utilizando los caracteres de separación.
@@ -308,7 +307,7 @@ void miscelanea(Datos *informacion, int num_anios) {
     // Calcular y mostrar las medias máxima y mínima de energía por año
     for (int i = 0; i < num_anios-1; i++) {
         double max_media = 0;
-        double min_media = DBL_MAX;
+        double min_media = DBL_MAX; //La constante DBL_MAX representa el valor máximo finito representable de tipo double. Utilizada para establecer un valor inicial alto para min_media
         int max_fuente_media = 0;
         int min_fuente_media = 0;
         for (int j = 0; j < 17; j++) {
