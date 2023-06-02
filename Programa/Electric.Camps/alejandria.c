@@ -4,30 +4,12 @@
 #include <float.h>
 #include<locale.h>
 #include<stdbool.h>
-
-typedef struct
-{
-    char energia[50];
-    double cantidad[12];
-
-}Energias;
-
-typedef struct
-{
-    int mes;
-    int anio;
-}fechas;
-
-typedef struct
-{
-    fechas fecha[12];
-    Energias datos[18];
-}Datos;
+#include"alejandria.h"
 
 
 void compilar_fechas(char fila[], Datos informacion[]){
     // Esta función se encarga de compilar las fechas en la estructura Datos
-    int i = 0, j = 0, k = 0, mes = 0, anio = 0;
+    int j=0,k = 0, mes = 0, anio = 0;
     char titulo[50], separador[] = ",/", *cad_aux;
     cad_aux = strtok(fila, separador); //se utiliza la función strtok para dividir la cadena fila en tokens utilizando los caracteres de separación.
     strcpy(titulo, cad_aux); //Copiamos el primer token con strcpy a la cadena titulo
@@ -53,7 +35,7 @@ void compilar_fechas(char fila[], Datos informacion[]){
 }
 
 void compilar(char fila[], Datos informacion[], int num_anios, int num_fuentes, int meses[]){
-    int i = 0, j = 0, k = 0;
+    int i = 0, k = 0;
     char separador[] = {'"',','}, *cad_aux;
     // Separar la cadena en tokens usando el separador ","
     cad_aux = strtok(fila, separador);
@@ -80,7 +62,6 @@ void compilar(char fila[], Datos informacion[], int num_anios, int num_fuentes, 
 
 void titulos(char fila[], Datos informacion[], int num_anio, int num_fuente){
     char *cad_aux, separador[] = ",";
-    int i = 0;
     //separar la cadena en tokens usando como separador ","
     cad_aux = strtok(fila, separador);
     //copiar el primer token a la estructura información
@@ -134,11 +115,11 @@ void imprimirTodo(Datos *valor_energia, int num_anio, int *num_mes_por_anio) {
 
 void mostrarMenu(Datos *valor_energia, int num_anio, int *num_mes_por_anio, Datos informacion[], int num_anios) {
     int selecciona;
-    char selecciona2;
     setlocale(LC_CTYPE, "");
     printf("Bienvenido a Electric.Camps de Camps.code\n");
     printf("Álvaro Campos Coria\n Alumno del E-105");
     printf("\n");
+    printf("Creador de todo el código, arreglé el programa :) .\n");
     system("pause");
     system("cls");
     printf("Se recomienda al usuario hacer uso de la consulta de índices de energia\n");
@@ -175,7 +156,7 @@ void mostrarMenu(Datos *valor_energia, int num_anio, int *num_mes_por_anio, Dato
                 system("cls");
                 break;
             case 1:
-                imprimirIndices(informacion);
+                imprimirIndices(*informacion);
                 system("pause");
                 system("cls");
                 break;
@@ -234,7 +215,7 @@ void calcularMedia(Datos *informacion, int num_anios) {
         return;
     }
     //Recorremos todos los años
-    for (i = 0; i < num_anios; i++) {
+    for (i = 0; i < num_anios-1; i++) {
         printf("Año: %d\n", informacion[i].fecha[0].anio);
         double sum = 0;
         //Calculamos la suma de los valores de energía de para el tipo de energía y año actual
@@ -259,7 +240,7 @@ void calcularMinimoMaximo(Datos *informacion, int num_anios) {
         return;
     }
     //Bucle para recorrer cada año
-    for (int i = 0; i < num_anios; i++) {
+    for (int i = 0; i < num_anios-1; i++) {
         printf("año: %d\n", informacion[i].fecha[0].anio);
         double min = informacion[i].datos[indice].cantidad[0];
         double max = informacion[i].datos[indice].cantidad[0];
@@ -290,7 +271,7 @@ void miscelanea(Datos *informacion, int num_anios) {
     int max_mes = 0;
     int max_fuente = 0;
     // Encontrar el valor máximo de energía en toda la información
-    for (int i = 0; i < num_anios; i++) {
+    for (int i = 0; i < num_anios-1; i++) {
         for (int j = 0; j < 17; j++) {
             for (int k = 0; k < 12; k++) {
                 if (informacion[i].datos[j].cantidad[k] > max_total) {
@@ -378,7 +359,7 @@ void archivoBacano(Datos *informacion, int num_anios) {
     }
     char opcion;
     // Preguntar al usuario si desea calcular la media de esta energía
-    printf("¿Desea calcular la media de esta energía? %s (s/n): ", informacion[indice].datos[indice]);
+    printf("¿Desea calcular la media de esta energía? %s (s/n): ",informacion[indice].datos[indice].energia);
     scanf(" %c", &opcion);
     bool calcularMedia = false;
     // Preguntar al usuario si desea calcular el mínimo y máximo de esta energía

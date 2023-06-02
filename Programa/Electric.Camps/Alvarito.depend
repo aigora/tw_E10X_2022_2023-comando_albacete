@@ -28,7 +28,7 @@
 	"alejandria.h"
 	<locale.h>
 
-1685351421 source:c:\users\34679\documents\github\tw_e10x_2022_2023-comando_albacete\programa\electric.camps\alvarito.c
+1685745517 source:c:\users\34679\documents\github\tw_e10x_2022_2023-comando_albacete\programa\electric.camps\alvarito.c
 	<stdio.h>
 	<string.h>
 	<stdlib.h>
@@ -37,11 +37,12 @@
 
 1685116056 c:\users\34679\documents\github\tw_e10x_2022_2023-comando_albacete\programa\electric.camps\alejandria.h
 
-1685369545 source:c:\users\34679\documents\github\tw_e10x_2022_2023-comando_albacete\programa\electric.camps\alejandria.c
+1685745647 source:c:\users\34679\documents\github\tw_e10x_2022_2023-comando_albacete\programa\electric.camps\alejandria.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<float.h>
 	<locale.h>
 	<stdbool.h>
+	"alejandria.h"
 

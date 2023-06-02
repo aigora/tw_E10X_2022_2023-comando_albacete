@@ -8,7 +8,7 @@ int main(){
 
     setlocale(LC_CTYPE, "");
 
-    int i = 0, j = 0, k = 0, t = 0, num_datos = 0, num_anio = 0, m = 0, num_mes_por_anio[15], num_mes = 0;
+    int i = 0, j = 0, num_datos = 0, num_anio = 0, m = 0, num_mes_por_anio[15];
     FILE *archivo;
     char* fila = malloc(10000 * sizeof(char));  // Puntero para almacenar temporalmente cada línea del archivo
     char** filas = NULL;  // Arreglo de punteros para almacenar las líneas del archivo
@@ -58,7 +58,7 @@ int main(){
         }
     }
 
-    memset(num_mes_por_anio, 0, 15);  // Inicializar el arreglo 'num_mes_por_anio' con ceros
+    memset(num_mes_por_anio, 0, sizeof(int));  // Inicializar el arreglo 'num_mes_por_anio' con ceros
 
     for (i = 0; i < num_anio; i++){
         for (j = 0; j < 12; j++){
