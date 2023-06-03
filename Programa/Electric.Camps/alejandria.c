@@ -119,7 +119,6 @@ void mostrarMenu(Datos *valor_energia, int num_anio, int *num_mes_por_anio, Dato
     printf("Bienvenido a Electric.Camps de Camps.code\n");
     printf("Álvaro Campos Coria\n Alumno del E-105");
     printf("\n");
-    printf("Creador de todo el código, arreglé el programa :) .\n");
     system("pause");
     system("cls");
     printf("Se recomienda al usuario hacer uso de la consulta de índices de energia\n");
